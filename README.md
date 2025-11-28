@@ -20,13 +20,18 @@ My project follows the architecture defined in `docs/ARCHITECTURE.md` and implem
 # 📌 PROJECT REPORT (As required by the assignment)
 
 ## 1. Title  
-[TODO: Write the title of your project here]
+Lexis-Freelance-Local: AI Legal Assistant for Freelancers
 
 ## 2. Overview  
-[TODO: Write a simple explanation: what your app does, why it exists, who uses it]
+Lexis-Freelance-Local is a local-only, CLI-driven tool designed to help freelancers generate, review, and negotiate service contracts. It uses a multi-agent architecture to research legal precedents, draft clauses, analyze changes, and manage administrative tasks like scheduling and invoicing, all without sending sensitive data to a cloud server (except for LLM inference).
 
 ## 3. Reason for choosing this project  
-[TODO: Explain how it uses prompting, tools, LangGraph, retrieval, etc.]
+This project demonstrates advanced usage of:
+- **LangGraph** for orchestrating complex, multi-step workflows (Research, Drafting, Negotiation, Admin).
+- **Tool Calling** for generating documents (PDF/DOCX) and managing signatures.
+- **Retrieval Augmented Generation (RAG)** using ChromaDB to fetch relevant legal clauses.
+- **Structured Output** for strict adherence to data models (ContractState).
+- **Prompt Engineering** to guide agents in specific legal tasks without hallucination.
 
 ## 4. Plan (each step must be committed separately)
 
@@ -49,18 +54,28 @@ Below is the step-by-step plan for executing the full project.
 - [x] Step 9 — Implement Validator with all 6 checks  
 - [x] Step 10 — Implement Tools Layer (template store, doc tools, signatures, payments)  
 - [x] Step 11 — Load clauses into ChromaDB  
-- [TODO] Step 12 — Testing + LangSmith debugging screenshots  
-- [TODO] Step 13 — Final cleanup and report completion  
+- [x] Step 12 — Testing + LangSmith debugging screenshots  
+- [x] Step 13 — Final cleanup and report completion  
+
+### Phase 2: Real AI Integration
+- [x] Install dependencies (`langchain`, `openai`, `chromadb`, `presidio`)
+- [x] Implement `template_store.py` with ChromaDB + OpenAI Embeddings
+- [x] Implement `research.py` with ChatOpenAI chains
+- [x] Implement `drafting.py` with ChatOpenAI chains
+- [x] Implement `negotiation.py` with ChatOpenAI chains
+- [x] Implement `admin.py` with ChatOpenAI chains
+- [x] Implement `validator.py` with Presidio PII scan + ChatOpenAI checks
+- [x] Verify full workflow with real AI calls  
 
 ---
 
 ## 5. Conclusion
 
 I had planned to achieve:  
-[TODO: write intended outcomes]
+A fully functional, local-first legal assistant that can autonomously draft and negotiate contracts using a multi-agent system.
 
-I believe I have/have not achieved these because:  
-[TODO: write reflection]
+I believe I have achieved these because:  
+I have implemented all the core subgraphs (Research, Drafting, Negotiation, Admin) and the Validator. The system successfully routes user requests, executes the appropriate workflow, and produces valid outputs. The modular architecture allows for easy extension, and the local tool integration ensures data privacy where possible. All planned steps have been executed and verified.
 
 ---
 

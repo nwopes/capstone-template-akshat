@@ -1,31 +1,36 @@
 import os
 from typing import List, Optional
-# Placeholder imports for LangChain and ChromaDB
-# from langchain_chroma import Chroma
-# from langchain_openai import OpenAIEmbeddings
-# from langchain_core.documents import Document
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_core.documents import Document
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class TemplateStore:
     def __init__(self):
         self.persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "vector_db")
-        # Initialize ChromaDB client and embeddings here
-        # self.embeddings = OpenAIEmbeddings()
-        # self.vector_store = Chroma(persist_directory=self.persist_directory, embedding_function=self.embeddings)
-        pass
+        os.makedirs(self.persist_directory, exist_ok=True)
+        
+        self.embeddings = OpenAIEmbeddings()
+        self.vector_store = Chroma(
+            persist_directory=self.persist_directory, 
+            embedding_function=self.embeddings,
+            collection_name="contract_clauses"
+        )
 
     def add_documents(self, documents: List[str], metadatas: Optional[List[dict]] = None):
-        # self.vector_store.add_texts(texts=documents, metadatas=metadatas)
-        print(f"Added {len(documents)} documents to TemplateStore (Placeholder)")
+        if not documents:
+            return
+        self.vector_store.add_texts(texts=documents, metadatas=metadatas)
+        print(f"Added {len(documents)} documents to TemplateStore.")
 
     def search(self, query: str, k: int = 3) -> List[str]:
-        # results = self.vector_store.similarity_search(query, k=k)
-        # return [doc.page_content for doc in results]
-        print(f"Searching TemplateStore for: '{query}' (Placeholder)")
-        return ["Placeholder Template 1", "Placeholder Template 2"]
+        results = self.vector_store.similarity_search(query, k=k)
+        return [doc.page_content for doc in results]
 
     def get_retriever(self):
-        # return self.vector_store.as_retriever()
-        return "Placeholder Retriever"
+        return self.vector_store.as_retriever(search_kwargs={"k": 3})
 
     def load_clauses(self, directory: str):
         if not os.path.exists(directory):
@@ -53,4 +58,5 @@ if __name__ == "__main__":
     # Test loading clauses
     clauses_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "clauses")
     store.load_clauses(clauses_dir)
+    print("Search results for 'payment':")
     print(store.search("payment"))

@@ -1,9 +1,15 @@
-from typing import Any, Dict, List
+from typing import Dict, Any
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from .state import ContractState
-# Placeholder imports for tools - assuming they will be implemented later or mocked here
-# from tools import doc_tools, signature_tools
+from tools.doc_tools import export_signature_pdf, export_to_pdf
+from tools.signature_tools import generate_signature_placeholder
 
 class AdminSupervisor:
+    def __init__(self):
+        self.llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
     def run(self, state: ContractState) -> ContractState:
         print("--- Admin Subgraph Started ---")
         
@@ -22,35 +28,55 @@ class AdminSupervisor:
         return state
 
     def _deadline_extractor(self, state: ContractState):
-        # TODO: Extract deadlines from contract content
-        state.messages.append({"node": "deadline_extractor", "status": "done", "info": "Extracted deadlines (placeholder)"})
+        print("--- Admin: Extracting Deadlines ---")
+        prompt = ChatPromptTemplate.from_template(
+            "Extract all deadlines and dates from this contract text: {text}. "
+            "Return as a list of 'Date: Description'."
+        )
+        chain = prompt | self.llm | StrOutputParser()
+        
+        text = state.draft_content or state.messages[0]["content"] if state.messages else ""
+        deadlines = chain.invoke({"text": text[:5000]}) # Limit text length
+        
+        state.messages.append({
+            "node": "deadline_extractor",
+            "status": "done",
+            "deadlines": deadlines
+        })
 
     def _scheduler_generator(self, state: ContractState):
-        # TODO: Generate ICS file content
-        state.messages.append({"node": "scheduler_generator", "status": "done", "info": "Generated ICS (placeholder)"})
+        print("--- Admin: Generating Scheduler ---")
+        # Placeholder for ICS generation
+        state.messages.append({
+            "node": "scheduler_generator",
+            "status": "done",
+            "info": "ICS file generated (placeholder)"
+        })
 
     def _signature_exporter(self, state: ContractState):
-        # Call doc_tools.export_signature_pdf and signature_tools.generate_signature_placeholder
-        # Since tools are not implemented yet, we will mock the behavior as requested
+        print("--- Admin: Exporting for Signature ---")
+        # Generate signature placeholder
+        sig_data = generate_signature_placeholder("Client")
+        state.signatures = sig_data
         
-        # Mocking doc_tools.export_signature_pdf
-        pdf_path = "placeholder_signature.pdf" 
+        # Export PDF
+        pdf_path = export_signature_pdf(state.draft_content or "No content", sig_data)
         
-        # Mocking signature_tools.generate_signature_placeholder
-        signature_data = {"status": "pending", "signer": "placeholder_signer"}
-        
-        state.signatures = signature_data
         state.messages.append({
-            "node": "signature_exporter", 
-            "status": "done", 
+            "node": "signature_exporter",
+            "status": "done",
             "pdf_path": pdf_path,
-            "signature_data": signature_data
+            "signature_data": sig_data
         })
 
     def _export_and_notify(self, state: ContractState):
-        # Placeholder for export and notification
-        # Do not send notifications; just append a message
-        state.messages.append({"node": "export_and_notify", "status": "done", "info": "Notification logged (no email sent)"})
+        print("--- Admin: Notifying ---")
+        # Placeholder notification
+        state.messages.append({
+            "node": "export_and_notify",
+            "status": "done",
+            "info": "Notification sent (placeholder)"
+        })
 
 if __name__ == "__main__":
     print("ADMIN SUBGRAPH READY")

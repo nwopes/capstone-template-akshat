@@ -1,8 +1,23 @@
 langchain
-langgraph
+# Core LLM + Chains
+langchain
 langchain-openai
+openai
+
+# LangGraph
+langgraph
+
+# RAG + Semantic Search
 chromadb
+langchain-chroma
+tiktoken
+sentence-transformers
+
+# Environment
 python-dotenv
-presidio-analyzer
+
+# Optional but useful for your deliverables
 python-docx
 reportlab
+presidio-analyzer
+presidio-anonymizer
