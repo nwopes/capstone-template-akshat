@@ -67,11 +67,18 @@ Below is the step-by-step plan for executing the full project.
 - [x] Implement `validator.py` with Presidio PII scan + ChatOpenAI checks
 - [x] Verify full workflow with real AI calls  
 - [x] Improve CLI UX (LLM Router + General Assistant)
+- [x] Step 13 — Final cleanup and report completion
+
+### Phase 3: Persistence & Memory
+- [x] Implement `tools/memory_store.py` (ChromaDB)
+- [x] Integrate Memory Store into `graph/main.py`
+- [x] Verify message persistence and context retrieval
 
 ### Features
 - **Natural Language Interface**: Chat with Lexis to get help or guidance.
 - **Smart Routing**: Automatically detects if you want to create, improve, review, or manage contracts.
 - **Real AI Integration**: Uses GPT-4o for all logic and reasoning.
+- **Conversation Memory**: Remembers your name and context across sessions using ChromaDB.
 - **Local Privacy**: Documents are processed locally; only text is sent to LLM.
 
 ---

@@ -12,6 +12,7 @@ from .admin import AdminSupervisor
 from .validator import Validator
 from .research import ResearchSupervisor
 from .drafting import DraftingSupervisor
+from tools.memory_store import MemoryStore
 
 # Load environment variables
 load_dotenv()
@@ -41,21 +42,33 @@ class Router:
         return category
 
 class GeneralAssistant:
-    def __init__(self):
+    def __init__(self, memory_store: MemoryStore):
         self.llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+        self.memory_store = memory_store
 
     def run(self, state: ContractState) -> ContractState:
         print("--- General Assistant ---")
+        
+        # Retrieve context from memory
+        user_input = state.messages[-1]["content"]
+        context = self.memory_store.get_context(user_input)
+        context_str = "\n".join(context)
+        
         prompt = ChatPromptTemplate.from_template(
             "You are Lexis, a helpful AI legal assistant for freelancers. "
+            "Here is some context from previous conversations:\n{context}\n\n"
             "The user said: {input}\n"
             "Respond helpfully and briefly. If they need to draft, review, or negotiate a contract, guide them to ask for that."
         )
         chain = prompt | self.llm | StrOutputParser()
-        response = chain.invoke({"input": state.messages[-1]["content"]})
+        response = chain.invoke({"input": user_input, "context": context_str})
         
         print(f"Lexis: {response}")
         state.messages.append({"role": "assistant", "content": response})
+        
+        # Save assistant response to memory
+        self.memory_store.add_message("assistant", response)
+        
         return state
 
 class Orchestrator:
@@ -65,11 +78,16 @@ class Orchestrator:
         self.validator = Validator()
         self.research_supervisor = ResearchSupervisor()
         self.drafting_supervisor = DraftingSupervisor()
-        self.general_assistant = GeneralAssistant()
+        self.memory_store = MemoryStore()
+        self.general_assistant = GeneralAssistant(self.memory_store)
 
     def run(self, state: ContractState):
         print(f"--- Orchestrator: Routing to {state.task_category} ---")
         
+        # Save user input to memory (if it's a new message)
+        if state.messages and state.messages[-1]["role"] == "user":
+             self.memory_store.add_message("user", state.messages[-1]["content"])
+
         # Route to subgraph
         if state.task_category == "chat":
             state = self.general_assistant.run(state)
