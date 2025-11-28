@@ -55,7 +55,10 @@ class DraftingSupervisor:
         version_entry = {
             "version": len(state.versions) + 1,
             "content": state.draft_content,
-            "timestamp": "placeholder_timestamp"
+            "timestamp": datetime.datetime.now().isoformat()
         }
         state.versions.append(version_entry)
         state.messages.append({"node": "draft_audit", "status": "done", "version": version_entry["version"]})
+
+if __name__ == "__main__":
+    print("DRAFTING SUBGRAPH READY")
