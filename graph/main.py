@@ -128,20 +128,47 @@ class Orchestrator:
         print("\n🔍 Validation Results:")
         for check, result in state.validation_report.items():
             if "details" not in check:
-                status_icon = "✅" if result == "pass" else "⚠️" if result == "warning" else "❌"
-                print(f"   {status_icon} {check.replace('_', ' ').title()}: {result.upper()}")
+                # Fix: Handle non-string results (like readability score)
+                display_result = str(result).upper()
+                status_icon = "✅" if display_result == "PASS" else "⚠️" if display_result == "WARNING" else "❌"
+                if isinstance(result, (int, float)):
+                     status_icon = "ℹ️"
+                
+                print(f"   {status_icon} {check.replace('_', ' ').title()}: {display_result}")
         
-        print("\n🚀 Next Steps:")
-        if state.task_category == "create":
-            print("   • Review the generated draft in 'data/state.json' or export it.")
-            print("   • Run 'admin' task to export to PDF/DOCX.")
-        elif state.task_category == "review":
-            print("   • Check the validation report for risks.")
-            print("   • Use 'improve' to fix identified issues.")
-        elif state.task_category == "admin":
-            print("   • Check the 'output' folder for your documents.")
+        print("\n🤖 Lexis Analysis:")
+        self.generate_helpful_feedback(state)
         
         print("="*30 + "\n")
+
+    def generate_helpful_feedback(self, state: ContractState):
+        # Use LLM to analyze the report and guide the user
+        llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+        prompt = ChatPromptTemplate.from_template(
+            "You are Lexis, the AI legal assistant. Analyze this contract task execution.\n"
+            "Task: {task}\n"
+            "Validation Report: {report}\n"
+            "Draft Preview: {preview}\n\n"
+            "1. Summarize what was done.\n"
+            "2. Identify any critical failures or missing information (e.g. missing payment terms, PII issues).\n"
+            "3. Tell the user EXACTLY what information they need to provide next to fix it.\n"
+            "4. Be encouraging and helpful.\n"
+            "Keep it brief (3-4 sentences)."
+        )
+        chain = prompt | llm | StrOutputParser()
+        
+        preview = (state.draft_content or "")[:500]
+        report_str = json.dumps(state.validation_report, indent=2)
+        
+        try:
+            feedback = chain.invoke({
+                "task": state.task_category,
+                "report": report_str,
+                "preview": preview
+            })
+            print(feedback)
+        except Exception as e:
+            print(f"Could not generate feedback: {e}")
 
 def checkpoint_state(state: ContractState):
     data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")

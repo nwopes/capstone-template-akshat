@@ -67,6 +67,7 @@ Below is the step-by-step plan for executing the full project.
 - [x] Implement `validator.py` with Presidio PII scan + ChatOpenAI checks
 - [x] Verify full workflow with real AI calls  
 - [x] Improve CLI UX (LLM Router + General Assistant)
+- [x] Improve CLI UX (LLM Router + General Assistant)
 - [x] Step 13 — Final cleanup and report completion
 
 ### Phase 3: Persistence & Memory
@@ -74,11 +75,16 @@ Below is the step-by-step plan for executing the full project.
 - [x] Integrate Memory Store into `graph/main.py`
 - [x] Verify message persistence and context retrieval
 
+### Phase 4: Robustness & Feedback
+- [x] Improve Error Handling (Fix crashes)
+- [x] Implement Smart Feedback (LLM-based guidance)
+
 ### Features
 - **Natural Language Interface**: Chat with Lexis to get help or guidance.
 - **Smart Routing**: Automatically detects if you want to create, improve, review, or manage contracts.
 - **Real AI Integration**: Uses GPT-4o for all logic and reasoning.
 - **Conversation Memory**: Remembers your name and context across sessions using ChromaDB.
+- **Smart Feedback**: Analyzes failures and tells you exactly what information is missing.
 - **Local Privacy**: Documents are processed locally; only text is sent to LLM.
 
 ---
@@ -148,6 +154,47 @@ Copy code
 - **Presidio Analyzer**  
 - **python-docx & reportlab**  
 - **python-dotenv**
+
+---
+
+# 🚀 How to Run
+
+### 1. Prerequisites
+- Python 3.11+
+- OpenAI API Key
+
+### 2. Setup
+1.  **Clone the repository**:
+    ```bash
+    git clone <your-repo-url>
+    cd capstone-template-akshat
+    ```
+2.  **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    python -m presidio_analyzer download en
+    ```
+3.  **Configure Environment**:
+    Create a `.env` file in the root directory:
+    ```env
+    OPENAI_API_KEY=sk-your-key-here
+    LANGCHAIN_TRACING_V2=true
+    LANGCHAIN_API_KEY=lsv2-your-key-here (optional)
+    ```
+
+### 3. Usage
+Run the CLI application:
+```bash
+python -m graph.main
+```
+
+**Interactive Commands:**
+- Say **"Hi"** to chat with Lexis.
+- Say **"Draft a contract for web design"** to start the drafting workflow.
+- Say **"Review this contract"** to start the review workflow.
+- Say **"My name is [Name]"** to test the memory.
+
+---
 
 ---
 
