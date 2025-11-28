@@ -1,1 +1,8 @@
-# Project requirements
+langchain
+langgraph
+langchain-openai
+chromadb
+python-dotenv
+presidio-analyzer
+python-docx
+reportlab
