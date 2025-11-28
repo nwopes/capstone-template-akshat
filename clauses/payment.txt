@@ -1,1 +1,5 @@
-Payment clause placeholder
+PAYMENT TERMS:
+1. The Client shall pay the Freelancer a total fee of [AMOUNT] [CURRENCY].
+2. Payment shall be made in installments as set forth in the Payment Schedule.
+3. Invoices shall be due within [DAYS] days of receipt.
+4. Late payments shall incur interest at a rate of [PERCENT]% per month.

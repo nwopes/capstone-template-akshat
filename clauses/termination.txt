@@ -1,1 +1,4 @@
-Termination clause placeholder
+TERMINATION:
+1. Either party may terminate this Agreement at any time upon [DAYS] days written notice to the other party.
+2. Upon termination, the Client shall pay the Freelancer for all Services performed and Deliverables provided up to the date of termination.
+3. Provisions regarding Confidentiality, Intellectual Property, and Indemnification shall survive termination.
