@@ -47,7 +47,7 @@ Below is the step-by-step plan for executing the full project.
 - [DONE] Step 7 — Implement Negotiation subgraph (6 nodes)  
 - [x] Step 8 — Implement Admin subgraph (4 nodes)  
 - [x] Step 9 — Implement Validator with all 6 checks  
-- [TODO] Step 10 — Implement Tools Layer (template store, doc tools, signatures, payments)  
+- [x] Step 10 — Implement Tools Layer (template store, doc tools, signatures, payments)  
 - [TODO] Step 11 — Load clauses into ChromaDB  
 - [TODO] Step 12 — Testing + LangSmith debugging screenshots  
 - [TODO] Step 13 — Final cleanup and report completion  
