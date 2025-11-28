@@ -42,7 +42,7 @@ Below is the step-by-step plan for executing the full project.
 - [DONE] Step 2 — Add `ARCHITECTURE.md` as the canonical system design  
 - [DONE] Step 3 — Implement `state.py` (global ContractState model)  
 - [x] Step 4 — Implement `main.py` (Router → Orchestrator → Validator)  
-- [TODO] Step 5 — Implement Research subgraph (all 6 required nodes)  
+- [x] Step 5 — Implement Research subgraph (all 6 required nodes)  
 - [TODO] Step 6 — Implement Drafting subgraph (7 nodes)  
 - [DONE] Step 7 — Implement Negotiation subgraph (6 nodes)  
 - [x] Step 8 — Implement Admin subgraph (4 nodes)  
