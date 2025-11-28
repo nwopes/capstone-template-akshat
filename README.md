@@ -39,7 +39,7 @@ Below is the step-by-step plan for executing the full project.
 ### ✔️ High-Level Project Steps
 
 - [DONE] Step 1 — Set up folder structure (`capstone-template-akshat`) and initialize repo  
-- [TODO] Step 2 — Add `ARCHITECTURE.md` as the canonical system design  
+- [DONE] Step 2 — Add `ARCHITECTURE.md` as the canonical system design  
 - [TODO] Step 3 — Implement `state.py` (global ContractState model)  
 - [TODO] Step 4 — Implement `main.py` (Router → Orchestrator → Validator)  
 - [TODO] Step 5 — Implement Research subgraph (all 6 required nodes)  
