@@ -3,6 +3,9 @@ import json
 import sys
 from typing import Optional
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from .state import ContractState
 from .negotiation import NegotiationSupervisor
 from .admin import AdminSupervisor
@@ -14,19 +17,46 @@ from .drafting import DraftingSupervisor
 load_dotenv()
 
 class Router:
-    @staticmethod
-    def route(text: str) -> str:
-        text = text.lower()
-        if "create" in text:
-            return "create"
-        elif "improve" in text:
-            return "improve"
-        elif "review" in text:
-            return "review"
-        elif "admin" in text:
-            return "admin"
-        else:
-            return "create" # Fallback
+    def __init__(self):
+        self.llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+    def route(self, text: str) -> str:
+        prompt = ChatPromptTemplate.from_template(
+            "Classify the user intent into one of these categories: "
+            "['create', 'improve', 'review', 'admin', 'chat'].\n"
+            "create: User wants to draft/create a new contract.\n"
+            "improve: User wants to edit/improve an existing contract.\n"
+            "review: User wants a contract reviewed/analyzed.\n"
+            "admin: User wants to manage deadlines, signatures, or export files.\n"
+            "chat: User is greeting, asking general questions, or not requesting a specific task.\n\n"
+            "User Input: {text}\n"
+            "Category:"
+        )
+        chain = prompt | self.llm | StrOutputParser()
+        category = chain.invoke({"text": text}).strip().lower()
+        
+        valid_categories = ['create', 'improve', 'review', 'admin', 'chat']
+        if category not in valid_categories:
+            return "chat"
+        return category
+
+class GeneralAssistant:
+    def __init__(self):
+        self.llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
+
+    def run(self, state: ContractState) -> ContractState:
+        print("--- General Assistant ---")
+        prompt = ChatPromptTemplate.from_template(
+            "You are Lexis, a helpful AI legal assistant for freelancers. "
+            "The user said: {input}\n"
+            "Respond helpfully and briefly. If they need to draft, review, or negotiate a contract, guide them to ask for that."
+        )
+        chain = prompt | self.llm | StrOutputParser()
+        response = chain.invoke({"input": state.messages[-1]["content"]})
+        
+        print(f"Lexis: {response}")
+        state.messages.append({"role": "assistant", "content": response})
+        return state
 
 class Orchestrator:
     def __init__(self):
@@ -35,12 +65,17 @@ class Orchestrator:
         self.validator = Validator()
         self.research_supervisor = ResearchSupervisor()
         self.drafting_supervisor = DraftingSupervisor()
+        self.general_assistant = GeneralAssistant()
 
     def run(self, state: ContractState):
         print(f"--- Orchestrator: Routing to {state.task_category} ---")
         
         # Route to subgraph
-        if state.task_category == "admin":
+        if state.task_category == "chat":
+            state = self.general_assistant.run(state)
+            return state # Skip validation for chat
+            
+        elif state.task_category == "admin":
             state = self.admin_supervisor.run(state)
         elif state.task_category in ["create", "improve", "review"]:
             if state.task_category == "create":
@@ -61,12 +96,34 @@ class Orchestrator:
         checkpoint_state(state)
         
         # Summary
-        print("\n--- Final Summary ---")
-        print(f"Task: {state.task_category}")
-        print(f"Messages: {len(state.messages)}")
-        print(f"Validation: {state.validation_report}")
+        self.print_summary(state)
         
         return state
+
+    def print_summary(self, state: ContractState):
+        print("\n" + "="*30)
+        print("       📝 MISSION REPORT       ")
+        print("="*30)
+        print(f"📌 Task Type: {state.task_category.upper()}")
+        print(f"💬 Messages Processed: {len(state.messages)}")
+        
+        print("\n🔍 Validation Results:")
+        for check, result in state.validation_report.items():
+            if "details" not in check:
+                status_icon = "✅" if result == "pass" else "⚠️" if result == "warning" else "❌"
+                print(f"   {status_icon} {check.replace('_', ' ').title()}: {result.upper()}")
+        
+        print("\n🚀 Next Steps:")
+        if state.task_category == "create":
+            print("   • Review the generated draft in 'data/state.json' or export it.")
+            print("   • Run 'admin' task to export to PDF/DOCX.")
+        elif state.task_category == "review":
+            print("   • Check the validation report for risks.")
+            print("   • Use 'improve' to fix identified issues.")
+        elif state.task_category == "admin":
+            print("   • Check the 'output' folder for your documents.")
+        
+        print("="*30 + "\n")
 
 def checkpoint_state(state: ContractState):
     data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
@@ -74,7 +131,7 @@ def checkpoint_state(state: ContractState):
     filepath = os.path.join(data_dir, "state.json")
     with open(filepath, "w") as f:
         json.dump(state.model_dump(), f, indent=2)
-    print(f"State saved to {filepath}")
+    # print(f"State saved to {filepath}") # Reduce noise
 
 def load_checkpoint() -> ContractState:
     data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
@@ -85,27 +142,38 @@ def load_checkpoint() -> ContractState:
                 data = json.load(f)
             return ContractState(**data)
         except Exception as e:
-            print(f"Error loading checkpoint: {e}")
+            # print(f"Error loading checkpoint: {e}")
             return ContractState()
     else:
         return ContractState()
 
 if __name__ == "__main__":
     # CLI Interface
-    print("--- Lexis-Freelance-Local CLI ---")
-    user_input = input("Input: ")
+    print("\n🤖 Lexis-Freelance-Local: AI Legal Assistant")
+    print("Type 'exit' to quit.\n")
     
-    # Load or create state
-    state = load_checkpoint()
-    
-    # Router
-    router = Router()
-    category = router.route(user_input)
-    state.task_category = category
-    state.messages.append({"role": "user", "content": user_input})
-    
-    # Orchestrator
-    orchestrator = Orchestrator()
-    orchestrator.run(state)
-    
-    print("MAIN ORCHESTRATOR READY")
+    while True:
+        try:
+            user_input = input("\nUser: ")
+            if user_input.lower() in ["exit", "quit"]:
+                print("Lexis: Goodbye!")
+                break
+            
+            # Load or create state (fresh state for chat, load for tasks if needed - simplified to load always)
+            state = load_checkpoint()
+            
+            # Router
+            router = Router()
+            category = router.route(user_input)
+            state.task_category = category
+            state.messages.append({"role": "user", "content": user_input})
+            
+            # Orchestrator
+            orchestrator = Orchestrator()
+            orchestrator.run(state)
+            
+        except (KeyboardInterrupt, EOFError):
+            print("\nLexis: Goodbye!")
+            break
+        except Exception as e:
+            print(f"An error occurred: {e}")

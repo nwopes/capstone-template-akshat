@@ -66,6 +66,13 @@ Below is the step-by-step plan for executing the full project.
 - [x] Implement `admin.py` with ChatOpenAI chains
 - [x] Implement `validator.py` with Presidio PII scan + ChatOpenAI checks
 - [x] Verify full workflow with real AI calls  
+- [x] Improve CLI UX (LLM Router + General Assistant)
+
+### Features
+- **Natural Language Interface**: Chat with Lexis to get help or guidance.
+- **Smart Routing**: Automatically detects if you want to create, improve, review, or manage contracts.
+- **Real AI Integration**: Uses GPT-4o for all logic and reasoning.
+- **Local Privacy**: Documents are processed locally; only text is sent to LLM.
 
 ---
 
