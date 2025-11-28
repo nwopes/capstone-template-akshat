@@ -44,7 +44,7 @@ Below is the step-by-step plan for executing the full project.
 - [TODO] Step 4 — Implement `main.py` (Router → Orchestrator → Validator)  
 - [TODO] Step 5 — Implement Research subgraph (all 6 required nodes)  
 - [TODO] Step 6 — Implement Drafting subgraph (7 nodes)  
-- [TODO] Step 7 — Implement Negotiation subgraph (6 nodes)  
+- [DONE] Step 7 — Implement Negotiation subgraph (6 nodes)  
 - [TODO] Step 8 — Implement Admin subgraph (4 nodes)  
 - [TODO] Step 9 — Implement Validator with all 6 checks  
 - [TODO] Step 10 — Implement Tools Layer (template store, doc tools, signatures, payments)  
