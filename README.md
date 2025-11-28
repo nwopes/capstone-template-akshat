@@ -1,71 +1,126 @@
-Template for creating and submitting MAT496 capstone project.
+# MAT496 Capstone Project  
+# Project Title: [TODO: Add your project title]
 
-# Overview of MAT496
+This repository contains my MAT496 Capstone Project submission.
 
-In this course, we have primarily learned Langgraph. This is helpful tool to build apps which can process unstructured `text`, find information we are looking for, and present the format we choose. Some specific topics we have covered are:
+The main purpose of this project is to demonstrate mastery of the topics taught in the course:
 
-- Prompting
-- Structured Output 
-- Semantic Search
-- Retreaval Augmented Generation (RAG)
-- Tool calling LLMs & MCP
-- Langgraph: State, Nodes, Graph
+- Prompting  
+- Structured Output  
+- Semantic Search  
+- Retrieval Augmented Generation (RAG)  
+- Tool Calling + MCP  
+- LangGraph: State, Nodes, Graph  
+- LangSmith debugging
 
-We also learned that Langsmith is a nice tool for debugging Langgraph codes.
+My project follows the architecture defined in `docs/ARCHITECTURE.md` and implements a full LangGraph-based multi-agent system.
 
-------
+---
 
-# Capstone Project objective
+# 📌 PROJECT REPORT (As required by the assignment)
 
-The first purpose of the capstone project is to give a chance to revise all the major above listed topics. The second purpose of the capstone is to show your creativity. Think about all the problems which you can not have solved earlier, but are not possible to solve with the concepts learned in this course. For example, We can use LLM to analyse all kinds of news: sports news, financial news, political news. Another example, we can use LLMs to build a legal assistant. Pretty much anything which requires lots of reading, can be outsourced to LLMs. Let your imagination run free.
+## 1. Title  
+[TODO: Write the title of your project here]
 
+## 2. Overview  
+[TODO: Write a simple explanation: what your app does, why it exists, who uses it]
 
--------------------------
+## 3. Reason for choosing this project  
+[TODO: Explain how it uses prompting, tools, LangGraph, retrieval, etc.]
 
-# Project report Template
+## 4. Plan (each step must be committed separately)
 
-## Title: [your title goes here]
+Below is the step-by-step plan for executing the full project.  
+**For each step:**
+- I will change `[TODO]` → `[DONE]` in this README
+- I will create **one commit per step**
+- Steps must be completed over at least **two different dates**
 
-## Overview
+### ✔️ High-Level Project Steps
 
-[your overview goes here. My project does this that  etc]
+- [DONE] Step 1 — Set up folder structure (`capstone-template-akshat`) and initialize repo  
+- [TODO] Step 2 — Add `ARCHITECTURE.md` as the canonical system design  
+- [TODO] Step 3 — Implement `state.py` (global ContractState model)  
+- [TODO] Step 4 — Implement `main.py` (Router → Orchestrator → Validator)  
+- [TODO] Step 5 — Implement Research subgraph (all 6 required nodes)  
+- [TODO] Step 6 — Implement Drafting subgraph (7 nodes)  
+- [TODO] Step 7 — Implement Negotiation subgraph (6 nodes)  
+- [TODO] Step 8 — Implement Admin subgraph (4 nodes)  
+- [TODO] Step 9 — Implement Validator with all 6 checks  
+- [TODO] Step 10 — Implement Tools Layer (template store, doc tools, signatures, payments)  
+- [TODO] Step 11 — Load clauses into ChromaDB  
+- [TODO] Step 12 — Testing + LangSmith debugging screenshots  
+- [TODO] Step 13 — Final cleanup and report completion  
 
-## Reason for picking up this project
+---
 
-Expain how this project is aligned with this course content.
+## 5. Conclusion
 
-## Plan
+I had planned to achieve:  
+[TODO: write intended outcomes]
 
-I plan to excecute these steps to complete my project.
+I believe I have/have not achieved these because:  
+[TODO: write reflection]
 
-- [TODO] Step 1 involves blah blah
-- [TODO] Step 2 involves blah blah
-- [TODO] Step 3 involves blah blah
-- ...
-- [TODO] Step n involves blah blah
+---
 
-## Conclusion:
+# 🚨 CAPSTONE RULES COMPLIANCE CHECKLIST
 
-I had planned to achieve {this this}. I think I have/have-not achieved the conclusion satisfactorily. The reason for your satisfaction/unsatisfaction.
+- Solo work — I am responsible for the code  
+- Commit history must show progress for each planned step  
+- Commits must span at least **two dates**  
+- Each step in plan must have:  
+  - `[TODO]` → `[DONE]`  
+  - A corresponding commit  
+- Submission deadline: **Nov 30, Sunday 11:59 pm**
 
-----------
+---
 
-# Added instructions:
+# 🧩 Project Structure
 
-- This is a `solo assignment`. Each of you will work alone. You are free to talk, discuss with chatgpt, but you are responsible for what you submit. Some students may be called for viva. You should be able to each and every line of work submitted by you.
+This repository must contain the *exact* structure:
 
-- `commit` History maintenance.
-  - Fork this respository and build on top of that.
-  - For every step in your plan, there has to be a commit.
-  - Change [TODO] to [DONE] in the plan, before you commit after that step. 
-  - The commit history should show decent amount of work spread into minimum two dates. 
-  - **All the commits done in one day will be rejected**. Even if you are capable of doing the whole thing in one day, refine it in two days.  
- 
- - Deadline: Nov 30, Sunday 11:59 pm
+capstone-template-akshat/
+├── graph
+│ ├── state.py
+│ ├── main.py
+│ ├── research.py
+│ ├── drafting.py
+│ ├── negotiation.py
+│ ├── admin.py
+│ └── validator.py
+├── tools
+│ ├── template_store.py
+│ ├── doc_tools.py
+│ ├── signature_tools.py
+│ └── payment_tools.py
+├── clauses
+│ ├── payment.txt
+│ ├── scope.txt
+│ └── termination.txt
+├── data
+│ └── vector_db/
+├── docs
+│ └── ARCHITECTURE.md
+├── requirements.txt
+├── .env
+└── README.md
 
+yaml
+Copy code
 
-# Grading: total 25 marks
+---
 
-- Coverage of most of topics in this class: 20
-- Creativity: 5
-  
+# ✔️ Technologies Used  
+- **LangChain**  
+- **LangGraph**  
+- **LangChain OpenAI wrappers**  
+- **ChromaDB**  
+- **Presidio Analyzer**  
+- **python-docx & reportlab**  
+- **python-dotenv**
+
+---
+
+# Final Note  
+This README.md acts as both the **official project documentation** and the **Capstone Project Report**, with all TODO → DONE traceable through commits.
