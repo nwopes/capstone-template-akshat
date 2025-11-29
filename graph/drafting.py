@@ -17,8 +17,8 @@ class DraftingSupervisor:
         # 1. Template Retriever
         self._template_retriever(state)
         
-        # 2. Clause Writer Agent
-        self._clause_writer_agent(state)
+        # 2. Contract Writer Agent
+        self._contract_writer_agent(state)
         
         # 3. Consistency & Readability Checker
         self._consistency_checker(state)
@@ -46,35 +46,47 @@ class DraftingSupervisor:
             "found": len(results)
         })
 
-    def _clause_writer_agent(self, state: ContractState):
-        print("--- Drafting: Writing Clauses ---")
+    def _contract_writer_agent(self, state: ContractState):
+        print("--- Drafting: Writing Contract ---")
         prompt = ChatPromptTemplate.from_template(
-            "You are a legal drafter. Write a contract clause based on this request: {request} "
-            "and these similar templates: {templates}. "
-            "Return ONLY the clause text."
+            "You are an expert legal drafter. Write a FULL, COMPREHENSIVE contract based on this brief: {brief}. "
+            "Use the provided structure: {structure}. "
+            "Incorporate these market terms/pricing: {market_terms}. "
+            "Use similar templates for reference: {templates}. "
+            "CRITICAL: If any specific value (name, date, amount, jurisdiction) is missing, YOU MUST USE A PLACEHOLDER like [PARTY_NAME], [DATE], [AMOUNT]. "
+            "Do not make up values. "
+            "Return the full contract text in Markdown format."
         )
         chain = prompt | self.llm | StrOutputParser()
         
-        request = state.messages[0]["content"] if state.messages else ""
+        # Find brief message
+        brief_msg = next((m for m in state.messages if m.get("node") == "synthesizer"), {})
+        
         templates = "\n\n".join(state.extracted_facts.get("drafting_templates", []))
         
-        clause = chain.invoke({"request": request, "templates": templates})
-        state.draft_content = clause
+        contract = chain.invoke({
+            "brief": brief_msg.get("brief", ""), 
+            "structure": state.contract_structure,
+            "market_terms": state.market_terms,
+            "templates": templates
+        })
+        state.draft_content = contract
         
         state.messages.append({
-            "node": "clause_writer",
+            "node": "contract_writer",
             "status": "done",
-            "content_preview": clause[:50] + "..."
+            "content_preview": contract[:100] + "..."
         })
 
     def _consistency_checker(self, state: ContractState):
         print("--- Drafting: Checking Consistency ---")
         prompt = ChatPromptTemplate.from_template(
-            "Check this contract clause for internal consistency and clarity: {clause}. "
-            "Return 'Pass' or a list of issues."
+            "Check this contract for internal consistency, clarity, and placeholder usage: {contract}. "
+            "Ensure all necessary sections are present. "
+            "Return 'Pass' or a list of issues/missing information."
         )
         chain = prompt | self.llm | StrOutputParser()
-        report = chain.invoke({"clause": state.draft_content})
+        report = chain.invoke({"contract": state.draft_content})
         
         state.validation_report["drafting_consistency"] = report
         state.messages.append({

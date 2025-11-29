@@ -25,11 +25,11 @@ class Router:
         prompt = ChatPromptTemplate.from_template(
             "Classify the user intent into one of these categories: "
             "['create', 'improve', 'review', 'admin', 'chat'].\n"
-            "create: User wants to draft/create a new contract.\n"
-            "improve: User wants to edit/improve an existing contract.\n"
-            "review: User wants a contract reviewed/analyzed.\n"
+            "create: User wants to draft/create a new contract, agreement, or legal document.\n"
+            "improve: User wants to edit, modify, or improve an existing contract.\n"
+            "review: User wants a contract reviewed, analyzed, or summarized.\n"
             "admin: User wants to manage deadlines, signatures, or export files.\n"
-            "chat: User is greeting, asking general questions, or not requesting a specific task.\n\n"
+            "chat: User is greeting, asking general questions, or not requesting a specific legal task.\n\n"
             "User Input: {text}\n"
             "Category:"
         )

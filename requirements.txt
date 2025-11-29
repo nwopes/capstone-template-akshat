@@ -21,3 +21,5 @@ python-docx
 reportlab
 presidio-analyzer
 presidio-anonymizer
+langchain-community
+tavily-python

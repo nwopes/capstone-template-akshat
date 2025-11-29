@@ -108,7 +108,10 @@ class ContractState(BaseModel):
     validation_report: Dict[str, Any] = {}
     human_feedback: Optional[str] = None
     signatures: Dict[str, Any] = {}
+    signatures: Dict[str, Any] = {}
     payment_schedule: Optional[Dict[str, Any]] = None
+    contract_structure: Optional[str] = None
+    market_terms: Optional[str] = None
 ````
 
 NO additional attributes may be added.
@@ -170,9 +173,11 @@ Business logic may be TODO stubs, but the structure MUST match this architecture
 1. **Research Supervisor**
 2. **Plan Node** (LCEL chain)
 3. **Template/Clause Search** (LangChain + Chroma retriever)
-4. **Extractor Node** (LLM chain or rule-based)
-5. **Synthesizer Node: Context Brief** (IRAC format optional)
-6. **Audit Node** (save facts + provenance)
+4. **Structure Research Node** (Tavily Search)
+5. **Market Research Node** (Tavily Search)
+6. **Extractor Node** (LLM chain or rule-based)
+7. **Synthesizer Node: Contract Brief** (Structure + Market Terms + Facts)
+8. **Audit Node** (save facts + provenance)
 
 Each node MUST append an entry to `state.messages`.
 
@@ -184,7 +189,7 @@ Each node MUST append an entry to `state.messages`.
 
 1. **Drafting Supervisor**
 2. **Template Retriever** (Chroma + LangChain Retriever)
-3. **Clause Writer Agent** (LLM chain using LCEL)
+3. **Contract Writer Agent** (LLM chain generating FULL contract with placeholders)
 4. **Consistency & Readability Checker**
 5. **Draft Assembler** (combines text)
 6. **Redline Generator** (simple diff)

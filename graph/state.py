@@ -11,3 +11,5 @@ class ContractState(BaseModel):
     human_feedback: Optional[str] = None
     signatures: Dict[str, Any] = {}
     payment_schedule: Optional[Dict[str, Any]] = None
+    contract_structure: Optional[str] = None
+    market_terms: Optional[str] = None

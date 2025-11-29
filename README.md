@@ -154,6 +154,7 @@ Copy code
 - **Presidio Analyzer**  
 - **python-docx & reportlab**  
 - **python-dotenv**
+- **Tavily API** (for internet research)
 
 ---
 
