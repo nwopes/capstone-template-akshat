@@ -26,8 +26,8 @@ class Router:
             "Classify the user intent into one of these categories: "
             "['create', 'improve', 'review', 'admin', 'chat'].\n"
             "create: User wants to draft/create a new contract, agreement, or legal document.\n"
-            "improve: User wants to edit, modify, or improve an existing contract.\n"
-            "review: User wants a contract reviewed, analyzed, or summarized.\n"
+            "improve: User wants to edit, modify, or improve an existing contract (e.g. 'rewrite this', 'make this better').\n"
+            "review: User wants a contract reviewed, analyzed, summarized, or completed (e.g. 'review this', 'fix loopholes', 'complete this').\n"
             "admin: User wants to manage deadlines, signatures, or export files.\n"
             "chat: User is greeting, asking general questions, or not requesting a specific legal task.\n\n"
             "User Input: {text}\n"
@@ -100,11 +100,13 @@ class Orchestrator:
                  state = self.research_supervisor.run(state)
                  state = self.drafting_supervisor.run(state)
             elif state.task_category == "improve":
+                 state = self.research_supervisor.run(state)
                  state = self.drafting_supervisor.run(state)
-                 state = self.negotiation_supervisor.run(state)
+                 # state = self.negotiation_supervisor.run(state) # Removed negotiation for improve, drafting handles rewrite
             elif state.task_category == "review":
                  state = self.research_supervisor.run(state)
-                 state = self.negotiation_supervisor.run(state)
+                 state = self.drafting_supervisor.run(state)
+                 # state = self.negotiation_supervisor.run(state) # Changed to drafting to support "complete this" request
             
         
         # Run Validator

@@ -136,8 +136,10 @@ class ResearchSupervisor:
         print("--- Research: Synthesizing Context ---")
         prompt = ChatPromptTemplate.from_template(
             "Synthesize a comprehensive Contract Brief based on the plan: {plan}, structure: {structure}, market terms: {market_terms}, and facts: {facts}. "
+            "If the user provided an existing contract/draft (in facts or request), analyze it against the structure and market terms. "
             "The brief should outline the sections of the contract and key terms to include. "
-            "Identify any missing information that needs placeholders."
+            "Identify any missing information that needs placeholders. "
+            "If improving/reviewing, highlight areas that need change."
         )
         chain = prompt | self.llm | StrOutputParser()
         # Find plan message

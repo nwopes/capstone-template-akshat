@@ -49,15 +49,18 @@ class DraftingSupervisor:
     def _contract_writer_agent(self, state: ContractState):
         print("--- Drafting: Writing Contract ---")
         prompt = ChatPromptTemplate.from_template(
-            "You are an expert legal drafter. Write a FULL, COMPREHENSIVE contract based on this brief: {brief}. "
+            "You are an expert legal drafter. Your task is to {task_type} a contract based on this brief: {brief}. "
             "Use the provided structure: {structure}. "
             "Incorporate these market terms/pricing: {market_terms}. "
             "Use similar templates for reference: {templates}. "
             "CRITICAL: If any specific value (name, date, amount, jurisdiction) is missing, YOU MUST USE A PLACEHOLDER like [PARTY_NAME], [DATE], [AMOUNT]. "
+            "If improving or completing a contract, ensure all loopholes are closed and missing sections added. "
             "Do not make up values. "
             "Return the full contract text in Markdown format."
         )
         chain = prompt | self.llm | StrOutputParser()
+        
+        task_type = state.task_category if state.task_category else "create"
         
         # Find brief message
         brief_msg = next((m for m in state.messages if m.get("node") == "synthesizer"), {})
@@ -65,6 +68,7 @@ class DraftingSupervisor:
         templates = "\n\n".join(state.extracted_facts.get("drafting_templates", []))
         
         contract = chain.invoke({
+            "task_type": task_type,
             "brief": brief_msg.get("brief", ""), 
             "structure": state.contract_structure,
             "market_terms": state.market_terms,

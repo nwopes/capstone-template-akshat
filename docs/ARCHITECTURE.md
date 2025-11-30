@@ -307,7 +307,7 @@ graph TD
   R_Synth --> R_Audit[Save facts + provenance]
 
   %% Drafting
-  Orch -->|create/improve| D_Sup[Drafting Supervisor]
+  Orch -->|create/improve/review| D_Sup[Drafting Supervisor]
   D_Sup --> D_Retr[Template Retriever]
   D_Retr --> D_Clauses[Clause Writer Agent]
   D_Clauses --> D_Checks[Consistency & Readability]
