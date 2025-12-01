@@ -31,13 +31,23 @@ class AdminSupervisor:
         print("--- Admin: Extracting Deadlines ---")
         prompt = ChatPromptTemplate.from_template(
             "Extract all deadlines and dates from this contract text: {text}. "
-            "Return as a list of 'Date: Description'."
+            "Return a JSON list of objects with 'date' (YYYY-MM-DD) and 'description'. "
+            "Example: [{{\"date\": \"2023-12-31\", \"description\": \"Project Completion\"}}]"
         )
         chain = prompt | self.llm | StrOutputParser()
         
         text = state.draft_content or state.messages[0]["content"] if state.messages else ""
-        deadlines = chain.invoke({"text": text[:5000]}) # Limit text length
+        try:
+            deadlines_json = chain.invoke({"text": text[:5000]})
+            # Clean up potential markdown code blocks
+            deadlines_json = deadlines_json.replace("```json", "").replace("```", "").strip()
+            import json
+            deadlines = json.loads(deadlines_json)
+        except Exception as e:
+            print(f"Error parsing deadlines: {e}")
+            deadlines = []
         
+        state.extracted_facts["deadlines"] = deadlines
         state.messages.append({
             "node": "deadline_extractor",
             "status": "done",
@@ -46,11 +56,37 @@ class AdminSupervisor:
 
     def _scheduler_generator(self, state: ContractState):
         print("--- Admin: Generating Scheduler ---")
-        # Placeholder for ICS generation
+        deadlines = state.extracted_facts.get("deadlines", [])
+        
+        if not deadlines:
+            info = "No deadlines found to schedule."
+        else:
+            # Generate ICS content manually
+            ics_content = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Lexis//ContractDeadlines//EN\n"
+            for item in deadlines:
+                date_str = item.get("date", "").replace("-", "")
+                desc = item.get("description", "Contract Deadline")
+                if len(date_str) == 8: # YYYYMMDD
+                    ics_content += "BEGIN:VEVENT\n"
+                    ics_content += f"DTSTART;VALUE=DATE:{date_str}\n"
+                    ics_content += f"SUMMARY:{desc}\n"
+                    ics_content += "END:VEVENT\n"
+            ics_content += "END:VCALENDAR"
+            
+            # Save to file
+            import os
+            data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+            os.makedirs(data_dir, exist_ok=True)
+            filepath = os.path.join(data_dir, "contract_deadlines.ics")
+            with open(filepath, "w") as f:
+                f.write(ics_content)
+            
+            info = f"ICS file generated at {filepath}"
+
         state.messages.append({
             "node": "scheduler_generator",
             "status": "done",
-            "info": "ICS file generated (placeholder)"
+            "info": info
         })
 
     def _signature_exporter(self, state: ContractState):

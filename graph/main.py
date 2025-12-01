@@ -51,7 +51,7 @@ class GeneralAssistant:
         
         # Retrieve context from memory
         user_input = state.messages[-1]["content"]
-        context = self.memory_store.get_context(user_input)
+        context = self.memory_store.get_context(user_input, session_id=state.session_id)
         context_str = "\n".join(context)
         
         prompt = ChatPromptTemplate.from_template(
@@ -67,7 +67,7 @@ class GeneralAssistant:
         state.messages.append({"role": "assistant", "content": response})
         
         # Save assistant response to memory
-        self.memory_store.add_message("assistant", response)
+        self.memory_store.add_message("assistant", response, session_id=state.session_id)
         
         return state
 
@@ -86,7 +86,7 @@ class Orchestrator:
         
         # Save user input to memory (if it's a new message)
         if state.messages and state.messages[-1]["role"] == "user":
-             self.memory_store.add_message("user", state.messages[-1]["content"])
+             self.memory_store.add_message("user", state.messages[-1]["content"], session_id=state.session_id)
 
         # Route to subgraph
         if state.task_category == "chat":
@@ -199,15 +199,36 @@ if __name__ == "__main__":
     print("\n🤖 Lexis-Freelance-Local: AI Legal Assistant")
     print("Type 'exit' to quit.\n")
     
+    current_session_id = "default"
+    
     while True:
         try:
-            user_input = input("\nUser: ")
+            user_input = input(f"\nUser ({current_session_id}): ")
             if user_input.lower() in ["exit", "quit"]:
                 print("Lexis: Goodbye!")
                 break
             
+            # Session Management Commands
+            if user_input.startswith("/session"):
+                parts = user_input.split()
+                if len(parts) > 1:
+                    current_session_id = parts[1]
+                    print(f"Switched to session: {current_session_id}")
+                else:
+                    print(f"Current session: {current_session_id}")
+                continue
+            elif user_input.startswith("/new"):
+                import uuid
+                current_session_id = str(uuid.uuid4())[:8]
+                print(f"Started new session: {current_session_id}")
+                continue
+            elif user_input.startswith("/info"):
+                print(f"Current Session ID: {current_session_id}")
+                continue
+            
             # Load or create state (fresh state for chat, load for tasks if needed - simplified to load always)
             state = load_checkpoint()
+            state.session_id = current_session_id # Ensure state has current session ID
             
             # Router
             router = Router()

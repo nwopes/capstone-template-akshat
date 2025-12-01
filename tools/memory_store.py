@@ -20,32 +20,35 @@ class MemoryStore:
             collection_name="conversation_history"
         )
 
-    def add_message(self, role: str, content: str):
+    def add_message(self, role: str, content: str, session_id: str = "default"):
         """Save a message to the memory store."""
         timestamp = datetime.datetime.now().isoformat()
         doc = Document(
             page_content=content,
             metadata={
                 "role": role,
-                "timestamp": timestamp
+                "timestamp": timestamp,
+                "session_id": session_id
             }
         )
         self.vector_store.add_documents([doc])
-        # print(f"Saved {role} message to memory.")
+        # print(f"Saved {role} message to memory (session: {session_id}).")
 
-    def get_context(self, query: str, k: int = 5) -> List[str]:
-        """Retrieve relevant past messages based on a query."""
-        results = self.vector_store.similarity_search(query, k=k)
+    def get_context(self, query: str, session_id: str = "default", k: int = 5) -> List[str]:
+        """Retrieve relevant past messages based on a query and session ID."""
+        # Filter by session_id
+        filter_dict = {"session_id": session_id}
+        
+        results = self.vector_store.similarity_search(
+            query, 
+            k=k,
+            filter=filter_dict
+        )
         return [f"{doc.metadata.get('role', 'unknown')}: {doc.page_content}" for doc in results]
 
-    def get_recent_messages(self, k: int = 5) -> List[str]:
-        """Get the most recent messages (simulated by empty query for now, or just relying on Chroma's default behavior if query is empty string which might not work as expected for 'recent', but good enough for context retrieval).
-        Actually, vector stores aren't great for 'recent' without a timestamp sort. 
-        For RAG, we usually want relevant.
-        """
-        # For true "recent", we'd need a different store or metadata filtering. 
-        # Here we will just expose search.
-        return self.get_context("", k=k)
+    def get_recent_messages(self, session_id: str = "default", k: int = 5) -> List[str]:
+        """Get the most recent messages for a session."""
+        return self.get_context("", session_id=session_id, k=k)
 
 if __name__ == "__main__":
     memory = MemoryStore()

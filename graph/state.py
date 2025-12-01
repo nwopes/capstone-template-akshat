@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Any, Dict, List, Optional
 
 class ContractState(BaseModel):
+    session_id: str = "default"
     messages: List[Dict[str, Any]] = []
     task_category: Optional[str] = None   # "create", "improve", "review", "admin"
     extracted_facts: Dict[str, Any] = {}

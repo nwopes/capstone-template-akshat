@@ -87,6 +87,8 @@ Below is the step-by-step plan for executing the full project.
 - **Smart Feedback**: Analyzes failures and tells you exactly what information is missing.
 - **Local Privacy**: Documents are processed locally; only text is sent to LLM.
 - **Enhanced Workflows**: Supports creating, improving, and reviewing/completing contracts with internet research and market pricing.
+- **Admin Automation**: Extracts deadlines and generates `.ics` calendar files.
+- **Context-Aware Memory**: Manages multiple sessions/contracts independently (use `/new`, `/session`, `/info`).
 
 ---
 
