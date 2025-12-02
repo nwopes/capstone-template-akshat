@@ -288,3 +288,5 @@ This README.md acts as both the **official project documentation** and the **Cap
 
 link for video:
 https://www.loom.com/share/3ef7cbae98f24e5f90e98b3a2174a9d3
+
+video2: https://www.loom.com/share/84f3889283f54fedad903dde2eba1bc4 ( this is for somewhat in deapth explanation for how all the nodes work )
