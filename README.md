@@ -1,5 +1,5 @@
 # MAT496 Capstone Project  
-# Project Title: [TODO: Add your project title]
+# Project Title: [AI contract agent for freelancers]
 
 This repository contains my MAT496 Capstone Project submission.
 
@@ -283,3 +283,8 @@ python -m graph.main
 
 # Final Note  
 This README.md acts as both the **official project documentation** and the **Capstone Project Report**, with all TODO → DONE traceable through commits.
+
+
+
+link for video:
+https://www.loom.com/share/3ef7cbae98f24e5f90e98b3a2174a9d3
