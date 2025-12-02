@@ -25,11 +25,13 @@ class Router:
         prompt = ChatPromptTemplate.from_template(
             "Classify the user intent into one of these categories: "
             "['create', 'improve', 'review', 'admin', 'chat'].\n"
-            "create: User wants to draft/create a new contract, agreement, or legal document.\n"
-            "improve: User wants to edit, modify, or improve an existing contract (e.g. 'rewrite this', 'make this better').\n"
-            "review: User wants a contract reviewed, analyzed, summarized, or completed (e.g. 'review this', 'fix loopholes', 'complete this').\n"
-            "admin: User wants to manage deadlines, signatures, or export files.\n"
+            "create: User wants to draft/create a new contract. Keywords: 'draft', 'create', 'write', 'make a contract'.\n"
+            "improve: User wants to edit, modify, or improve an existing contract. INCLUDES providing details to fill placeholders (e.g. '[DATE]...', 'Here are the details').\n"
+            "review: User wants a contract reviewed, analyzed, or completed. Keywords: 'review', 'check', 'fix loopholes', 'complete this'.\n"
+            "admin: User wants to manage deadlines, signatures, or export files. Keywords: 'export', 'save as', 'generate pdf', 'generate txt', 'ics', 'calendar'.\n"
             "chat: User is greeting, asking general questions, or not requesting a specific legal task.\n\n"
+            "CRITICAL: If the user provides a block of text with contract details or values for placeholders, classify as 'improve' or 'review'.\n"
+            "CRITICAL: If the user asks to export/generate a file (pdf, txt, ics), classify as 'admin'.\n"
             "User Input: {text}\n"
             "Category:"
         )
@@ -85,7 +87,7 @@ class Orchestrator:
         print(f"--- Orchestrator: Routing to {state.task_category} ---")
         
         # Save user input to memory (if it's a new message)
-        if state.messages and state.messages[-1]["role"] == "user":
+        if state.messages and state.messages[-1].get("role") == "user":
              self.memory_store.add_message("user", state.messages[-1]["content"], session_id=state.session_id)
 
         # Route to subgraph

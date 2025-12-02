@@ -5,7 +5,10 @@ from langchain_core.output_parsers import StrOutputParser
 from .state import ContractState
 from .state import ContractState
 from tools.template_store import TemplateStore
-from langchain_community.tools.tavily_search import TavilySearchResults
+try:
+    from langchain_tavily import TavilySearchResults
+except ImportError:
+    from langchain_community.tools.tavily_search import TavilySearchResults
 
 class ResearchSupervisor:
     def __init__(self):
@@ -119,13 +122,18 @@ class ResearchSupervisor:
     def _extractor_node(self, state: ContractState):
         print("--- Research: Extracting Facts ---")
         prompt = ChatPromptTemplate.from_template(
-            "Extract key facts (parties, dates, amounts, jurisdiction) from this request: {request}. "
-            "Return as a JSON-like string."
+            "Extract all key facts and specific details from this request: {request}. "
+            "The user might provide data in a format like '[KEY]Value' or just natural language. "
+            "Return a valid JSON object where keys are the placeholder names (e.g., 'CLIENT_NAME', 'DATE') and values are the extracted content. "
+            "Example Input: '[DATE]2024-01-01 [NAME]John Doe' -> Output: {{'DATE': '2024-01-01', 'NAME': 'John Doe'}}"
         )
         chain = prompt | self.llm | StrOutputParser()
-        facts = chain.invoke({"request": state.messages[0]["content"] if state.messages else ""})
+        facts_json = chain.invoke({"request": state.messages[0]["content"] if state.messages else ""})
         
-        state.extracted_facts["key_info"] = facts
+        # Clean up json
+        facts_json = facts_json.replace("```json", "").replace("```", "").strip()
+        
+        state.extracted_facts["key_info"] = facts_json
         state.messages.append({
             "node": "fact_extractor",
             "status": "done",

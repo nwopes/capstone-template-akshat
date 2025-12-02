@@ -1,31 +1,19 @@
 {
+  "session_id": "default",
   "messages": [
     {
       "role": "user",
-      "content": "Extract deadlines from this contract: Project starts on 2024-01-01. First milestone due 2024-02-15. Final delivery by 2024-03-31."
+      "content": "export to txt"
     },
     {
       "node": "deadline_extractor",
       "status": "done",
-      "deadlines": [
-        {
-          "date": "2024-01-01",
-          "description": "Project starts"
-        },
-        {
-          "date": "2024-02-15",
-          "description": "First milestone due"
-        },
-        {
-          "date": "2024-03-31",
-          "description": "Final delivery"
-        }
-      ]
+      "deadlines": []
     },
     {
       "node": "scheduler_generator",
       "status": "done",
-      "info": "ICS file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract_deadlines.ics"
+      "info": "No deadlines found to schedule."
     },
     {
       "node": "signature_exporter",
@@ -44,6 +32,163 @@
       "info": "Notification sent (placeholder)"
     },
     {
+      "node": "text_exporter",
+      "status": "done",
+      "info": "Text file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract.txt"
+    },
+    {
+      "node": "validator",
+      "status": "done",
+      "info": "Validator run completed"
+    },
+    {
+      "node": "deadline_extractor",
+      "status": "done",
+      "deadlines": []
+    },
+    {
+      "node": "scheduler_generator",
+      "status": "done",
+      "info": "No deadlines found to schedule."
+    },
+    {
+      "node": "signature_exporter",
+      "status": "done",
+      "pdf_path": "C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\signed_contract.pdf",
+      "signature_data": {
+        "signer": "Client",
+        "status": "pending",
+        "signature_id": "sig_placeholder_123",
+        "timestamp": "placeholder_timestamp"
+      }
+    },
+    {
+      "node": "export_and_notify",
+      "status": "done",
+      "info": "Notification sent (placeholder)"
+    },
+    {
+      "node": "text_exporter",
+      "status": "done",
+      "info": "Text file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract_v2.txt"
+    },
+    {
+      "node": "validator",
+      "status": "done",
+      "info": "Validator run completed"
+    },
+    {
+      "node": "deadline_extractor",
+      "status": "done",
+      "deadlines": []
+    },
+    {
+      "node": "scheduler_generator",
+      "status": "done",
+      "info": "No deadlines found to schedule."
+    },
+    {
+      "node": "signature_exporter",
+      "status": "done",
+      "pdf_path": "C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\signed_contract.pdf",
+      "signature_data": {
+        "signer": "Client",
+        "status": "pending",
+        "signature_id": "sig_placeholder_123",
+        "timestamp": "placeholder_timestamp"
+      }
+    },
+    {
+      "node": "export_and_notify",
+      "status": "done",
+      "info": "Notification sent (placeholder)"
+    },
+    {
+      "node": "text_exporter",
+      "status": "done",
+      "info": "Text file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract_v3.txt"
+    },
+    {
+      "node": "validator",
+      "status": "done",
+      "info": "Validator run completed"
+    },
+    {
+      "role": "user",
+      "content": "fix the warning with placeholder values, and generate .txt file "
+    },
+    {
+      "node": "deadline_extractor",
+      "status": "done",
+      "deadlines": []
+    },
+    {
+      "node": "scheduler_generator",
+      "status": "done",
+      "info": "No deadlines found to schedule."
+    },
+    {
+      "node": "signature_exporter",
+      "status": "done",
+      "pdf_path": "C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\signed_contract.pdf",
+      "signature_data": {
+        "signer": "Client",
+        "status": "pending",
+        "signature_id": "sig_placeholder_123",
+        "timestamp": "placeholder_timestamp"
+      }
+    },
+    {
+      "node": "export_and_notify",
+      "status": "done",
+      "info": "Notification sent (placeholder)"
+    },
+    {
+      "node": "text_exporter",
+      "status": "done",
+      "info": "Text file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract.txt"
+    },
+    {
+      "node": "validator",
+      "status": "done",
+      "info": "Validator run completed"
+    },
+    {
+      "role": "user",
+      "content": "generate .txt file for the draft contract "
+    },
+    {
+      "node": "deadline_extractor",
+      "status": "done",
+      "deadlines": []
+    },
+    {
+      "node": "scheduler_generator",
+      "status": "done",
+      "info": "No deadlines found to schedule."
+    },
+    {
+      "node": "signature_exporter",
+      "status": "done",
+      "pdf_path": "C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\signed_contract.pdf",
+      "signature_data": {
+        "signer": "Client",
+        "status": "pending",
+        "signature_id": "sig_placeholder_123",
+        "timestamp": "placeholder_timestamp"
+      }
+    },
+    {
+      "node": "export_and_notify",
+      "status": "done",
+      "info": "Notification sent (placeholder)"
+    },
+    {
+      "node": "text_exporter",
+      "status": "done",
+      "info": "Text file generated at C:\\Users\\Akshat\\Desktop\\llm_proj1\\capstone-template-akshat\\data\\contract.txt"
+    },
+    {
       "node": "validator",
       "status": "done",
       "info": "Validator run completed"
@@ -51,36 +196,23 @@
   ],
   "task_category": "admin",
   "extracted_facts": {
-    "deadlines": [
-      {
-        "date": "2024-01-01",
-        "description": "Project starts"
-      },
-      {
-        "date": "2024-02-15",
-        "description": "First milestone due"
-      },
-      {
-        "date": "2024-03-31",
-        "description": "Final delivery"
-      }
-    ]
+    "deadlines": []
   },
-  "draft_content": null,
+  "draft_content": "Draft Content V3",
   "versions": [],
   "validation_report": {
     "pii_scan": "pass",
     "pii_details": "No PII found",
     "enforceability": "warning",
-    "enforceability_details": "Of course, please provide the contract text you would like me to review for enforceability risks.",
+    "enforceability_details": "To provide a thorough review of the contract text for enforceability risks, I would need to see the specific content of \"Draft Content V3.\" However, I can provide you with a general list of common enforceability risks to look out for in contracts:\n\n1. **Ambiguity**: Vague or unclear terms that could lead to multiple interpretations.\n\n2. **Lack of Consideration**: Each party must provide something of value; otherwise, the contract may not be enforceable.\n\n3. **Capacity**: All parties must have the legal capacity to enter into a contract (e.g., age, mental competence).\n\n4. **Legality**: The contract's subject matter must be legal.\n\n5. **Mutual Assent**: There must be a clear offer and acceptance.\n\n6. **Fraud or Misrepresentation**: Any false statements that induce a party to enter the contract.\n\n7. **Duress or Undue Influence**: The contract must be entered into freely, without coercion.\n\n8. **Unconscionability**: Terms that are excessively unfair to one party.\n\n9. **Non-compliance with Statute of Frauds**: Certain contracts must be in writing to be enforceable.\n\n10. **Incomplete Terms**: Missing essential terms that are necessary for the contract to be enforceable.\n\n11. **Breach of Public Policy**: Terms that violate public policy may be unenforceable.\n\n12. **Errors in Execution**: Mistakes in the signing process or failure to follow formalities.\n\nIf you can provide the specific text or more details about the contract, I can offer a more tailored assessment.",
     "payment_check": "pass",
-    "payment_details": "To determine whether the contract contains clear payment terms, I would need to review the specific details of the contract. Please provide the relevant sections or details of the contract that outline the payment terms, including the amount, schedule, and currency. Once I have that information, I can assess whether the terms are clear and provide a 'Pass' or 'Fail' with a reason.",
-    "ip_ownership": "pass",
-    "ip_details": "To determine whether a contract clearly defines Intellectual Property (IP) ownership, you would need to review the specific language and clauses related to IP within the contract. Here are some key elements to look for:\n\n1. **Definition of Intellectual Property**: The contract should clearly define what constitutes IP within the context of the agreement. This might include patents, copyrights, trademarks, trade secrets, and any other relevant forms of IP.\n\n2. **Ownership Clause**: The contract should explicitly state who owns the IP. This could be the creator, the employer, or another party, depending on the nature of the agreement.\n\n3. **Assignment of Rights**: If the IP is being transferred from one party to another, the contract should include an assignment clause that details this transfer.\n\n4. **Licensing Terms**: If the IP is being licensed rather than transferred, the contract should specify the terms of the license, including scope, duration, and any limitations.\n\n5. **Work for Hire**: If applicable, the contract should include a \"work for hire\" clause, which typically means that the employer or commissioning party owns the IP created by an employee or contractor.\n\n6. **Dispute Resolution**: The contract should outline how disputes regarding IP ownership will be resolved.\n\n7. **Confidentiality and Non-Disclosure**: There should be clauses that protect the confidentiality of the IP and any related information.\n\n8. **Termination and Consequences**: The contract should specify what happens to the IP upon termination of the agreement.\n\nTo provide a 'Pass' or 'Fail' judgment, you would need to evaluate whether these elements are present and clearly articulated in the contract. If the contract includes these elements and they are clearly defined, it would likely 'Pass'. If any of these elements are missing or unclear, it would likely 'Fail', and you should specify which elements are lacking or ambiguous.",
-    "readability_score": 0,
-    "readability_details": "Average word length: 0",
+    "payment_details": "To determine whether the contract contains clear payment terms, I would need to review the specific content of \"Draft Content V3.\" However, since I cannot access external documents or specific drafts, I can guide you on what to look for in the contract to make this assessment:\n\n1. **Amount**: The contract should specify the exact amount to be paid. This could be a fixed sum or a formula for calculating the amount.\n\n2. **Schedule**: The contract should clearly outline when payments are due. This could be a specific date, a series of dates, or upon the completion of certain milestones.\n\n3. **Currency**: The contract should specify the currency in which the payment will be made (e.g., USD, EUR).\n\nIf \"Draft Content V3\" includes all these elements clearly and unambiguously, you would return 'Pass'. If any of these elements are missing or unclear, you would return 'Fail' with an explanation of what is lacking or unclear.\n\nFor example:\n- **Pass**: The contract specifies a payment of $10,000, due on the 1st of each month, in USD.\n- **Fail**: The contract does not specify the currency for the payment, making it unclear.\n\nPlease review the document based on these criteria to determine if it passes or fails.",
+    "ip_ownership": "fail",
+    "ip_details": "To determine whether the contract \"Draft Content V3\" clearly defines Intellectual Property (IP) ownership, I would need to review the specific language and clauses related to IP within the document. Since I cannot view the document directly, I can provide guidance on what to look for in the contract to assess whether it clearly defines IP ownership:\n\n1. **Definition of Intellectual Property**: The contract should clearly define what constitutes intellectual property within the context of the agreement. This includes specifying types of IP such as copyrights, patents, trademarks, and trade secrets.\n\n2. **Ownership Clause**: The contract should explicitly state who owns the IP created under the contract. This could be the creator, the client, or a third party, depending on the agreement.\n\n3. **Assignment of Rights**: If the IP is to be transferred from one party to another, the contract should include an assignment clause that details the transfer of rights and any conditions associated with it.\n\n4. **Licensing Terms**: If the IP is not fully transferred but licensed, the contract should specify the scope, duration, and limitations of the license.\n\n5. **Work for Hire**: If applicable, the contract should state whether the work is considered \"work for hire,\" which typically means the employer or client automatically owns the IP.\n\n6. **Moral Rights**: The contract should address whether the creator retains any moral rights to the work, such as the right to attribution or to object to derogatory treatment of the work.\n\n7. **Dispute Resolution**: The contract should include a mechanism for resolving disputes related to IP ownership.\n\n8. **Confidentiality and Non-Disclosure**: Provisions related to the protection of confidential information and trade secrets should be included.\n\nIf \"Draft Content V3\" includes clear and comprehensive clauses addressing these points, it would likely pass as clearly defining IP ownership. If any of these elements are missing or ambiguous, it would likely fail. Without reviewing the actual document, I can only provide this framework for assessment.",
+    "readability_score": 4.67,
+    "readability_details": "Average word length: 4.67",
     "consistency": "warning",
-    "consistency_details": "Please provide the text of the contract you would like me to review for contradictions."
+    "consistency_details": "To check for contradictions in a contract, I would need to review the specific content of \"Draft Content V3.\" Since I don't have access to external documents or the ability to view specific files, you would need to provide the text of the contract here. Once you do, I can help identify any potential contradictions."
   },
   "human_feedback": null,
   "signatures": {

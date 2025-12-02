@@ -24,8 +24,44 @@ class AdminSupervisor:
         
         # 4. Export & Notify
         self._export_and_notify(state)
+
+        # 5. Text Exporter
+        self._text_exporter(state)
         
         return state
+
+    def _text_exporter(self, state: ContractState):
+        print("--- Admin: Checking for Text Export ---")
+        # Find the last user message
+        last_user_msg = next((m.get("content", "") for m in reversed(state.messages) if m.get("role") == "user"), "").lower()
+        
+        # Check if user asked for text file
+        if any(keyword in last_user_msg for keyword in ["txt", "text file", ".txt", "plain text"]):
+            print("--- Admin: Exporting to .txt ---")
+            import os
+            data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+            os.makedirs(data_dir, exist_ok=True)
+            
+            # Generate unique filename
+            base_name = "contract"
+            extension = ".txt"
+            counter = 1
+            while True:
+                filename = f"{base_name}_v{counter}{extension}" if counter > 1 else f"{base_name}{extension}"
+                filepath = os.path.join(data_dir, filename)
+                if not os.path.exists(filepath):
+                    break
+                counter += 1
+            
+            content = state.draft_content or "No contract content available."
+            with open(filepath, "w", encoding="utf-8") as f:
+                f.write(content)
+                
+            state.messages.append({
+                "node": "text_exporter",
+                "status": "done",
+                "info": f"Text file generated at {filepath}"
+            })
 
     def _deadline_extractor(self, state: ContractState):
         print("--- Admin: Extracting Deadlines ---")
@@ -36,7 +72,7 @@ class AdminSupervisor:
         )
         chain = prompt | self.llm | StrOutputParser()
         
-        text = state.draft_content or state.messages[0]["content"] if state.messages else ""
+        text = state.draft_content or (state.messages[0].get("content", "") if state.messages else "")
         try:
             deadlines_json = chain.invoke({"text": text[:5000]})
             # Clean up potential markdown code blocks

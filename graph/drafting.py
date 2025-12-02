@@ -53,8 +53,11 @@ class DraftingSupervisor:
             "Use the provided structure: {structure}. "
             "Incorporate these market terms/pricing: {market_terms}. "
             "Use similar templates for reference: {templates}. "
-            "CRITICAL: If any specific value (name, date, amount, jurisdiction) is missing, YOU MUST USE A PLACEHOLDER like [PARTY_NAME], [DATE], [AMOUNT]. "
-            "If improving or completing a contract, ensure all loopholes are closed and missing sections added. "
+            "CURRENT DRAFT (for improvements): {current_draft}\n"
+            "CRITICAL: The brief contains specific extracted values (JSON). YOU MUST USE THESE VALUES to fill in the contract. "
+            "For example, if the brief says {{'CLIENT_NAME': 'Acme Corp'}}, you must write 'Acme Corp' in the contract, NOT '[CLIENT_NAME]'. "
+            "Only use placeholders like [PARTY_NAME] if the value is TRULY missing from the brief. "
+            "If improving, review the CURRENT DRAFT and fix any issues, consistency warnings, or missing sections. "
             "Do not make up values. "
             "Return the full contract text in Markdown format."
         )
@@ -69,10 +72,11 @@ class DraftingSupervisor:
         
         contract = chain.invoke({
             "task_type": task_type,
-            "brief": brief_msg.get("brief", ""), 
+            "brief": brief_msg.get("brief", "") + "\n\nEXTRACTED FACTS:\n" + state.extracted_facts.get("key_info", ""), 
             "structure": state.contract_structure,
             "market_terms": state.market_terms,
-            "templates": templates
+            "templates": templates,
+            "current_draft": state.draft_content or "No existing draft."
         })
         state.draft_content = contract
         
