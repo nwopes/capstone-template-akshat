@@ -42,7 +42,7 @@ class TemplateStore:
         for filename in os.listdir(directory):
             if filename.endswith(".txt"):
                 filepath = os.path.join(directory, filename)
-                with open(filepath, "r") as f:
+                with open(filepath, "r", encoding="utf-8") as f:
                     content = f.read()
                     documents.append(content)
                     metadatas.append({"source": filename})

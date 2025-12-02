@@ -1,0 +1,127 @@
+SERVICE AGREEMENT (REVISED, STRONG & LOOPHOLE-RESISTANT)
+
+This Service Agreement (“Agreement”) is entered into as of the [DATE], by and between:
+
+Client: [CLIENT_NAME]
+Address: [CLIENT_ADDRESS]
+
+Service Provider: [PROVIDER_NAME]
+Address: [PROVIDER_ADDRESS]
+
+The Parties agree as follows:
+
+1. Scope of Work (“SOW”)
+
+1.1 The Service Provider will perform professional services (“Services”) as requested by the Client: [DESCRIPTION_OF_SERVICES].
+1.2 All Services must be mutually agreed upon in writing (email is sufficient).
+1.3 Any work not explicitly described in the written SOW— including added features, scope creep, or additional requirements — is considered out-of-scope and requires written approval and additional compensation at the rates defined herein.
+1.4 The Service Provider does not guarantee results dependent on third parties (e.g., software vendors, platforms, regulators).
+
+2. Term
+
+2.1 This Agreement begins on [START_DATE].
+2.2 The term shall run for [DURATION], ending [END_DATE], unless terminated earlier as provided herein.
+2.3 Any extension must be agreed upon in writing by both Parties.
+
+3. Hours & Availability
+
+3.1 Service Provider will provide an average of [EXPECTED_HOURS] per week (if applicable).
+3.2 Hours will be tracked accurately and made available to the Client upon request.
+3.3 Service Provider shall not exceed [EXPECTED_HOURS] per week unless the Client provides written approval.
+3.4 The Client understands that delayed responses, asset delivery, or approvals may impact timelines; Service Provider is not responsible for such delays.
+
+4. Compensation
+
+4.1 Client shall pay the Service Provider [HOURLY_RATE] per hour (or [FIXED_FEE] flat fee) for all work performed.
+4.2 Service Provider shall invoice weekly or biweekly (choose one: weekly / biweekly).
+4.3 Invoices must be paid within [PAYMENT_TIMELINE] days of receipt unless otherwise agreed in writing.
+4.4 Any invoice not paid within [PAYMENT_TIMELINE] days may incur:
+
+A late fee of 1.5% per month or the maximum allowed by law, whichever is lower, and
+
+Suspension of Services until payment is received.
+4.5 Service Provider has no obligation to deliver final work product until all outstanding balances are paid in full.
+
+5. Independent Contractor
+
+5.1 The Service Provider is an independent contractor, not an employee.
+5.2 Service Provider may work with other clients and set their own schedule, provided they meet the agreed commitments.
+5.3 Service Provider is solely responsible for all taxes, insurance, and related obligations.
+
+6. Revisions (If Applicable)
+
+6.1 Service Provider will provide reasonable revisions related to the agreed SOW.
+6.2 Any revision exceeding the original scope or requiring more than two (2) rounds per deliverable will be billed hourly.
+6.3 Client may not demand unlimited revisions or scope changes without paying additional fees.
+
+7. Ownership & Intellectual Property
+
+7.1 Upon full payment of all fees, Client shall own the final completed deliverables created specifically for the project.
+7.2 Service Provider retains:
+
+All intellectual property rights in pre-existing tools, code snippets, processes, templates, and proprietary methods;
+
+Rights to display the completed project in a portfolio unless the Client requests confidentiality in writing.
+7.3 Client receives a perpetual, non-exclusive license to any Service Provider-owned materials incorporated into the final deliverables.
+
+8. Confidentiality
+
+8.1 Both Parties agree to maintain strict confidentiality regarding proprietary information, client data, and business details.
+8.2 Confidentiality obligations survive termination indefinitely.
+
+9. Termination
+
+9.1 Either Party may terminate this Agreement with [NOTICE_PERIOD] written notice.
+9.2 The Client must pay the Service Provider for:
+
+All hours worked up to the effective termination date;
+
+Any approved work-in-progress;
+
+All outstanding invoices.
+9.3 Service Provider may terminate immediately if:
+
+The Client fails to pay an invoice within 10 days of the due date;
+
+The Client engages in harassment, abusive communication, or unlawful activity;
+
+The Client demands work outside the terms of this Agreement without compensation.
+9.4 Upon termination and payment, the Service Provider will deliver all completed work to date.
+
+10. Warranties & Limitations
+
+10.1 Service Provider warrants that all work will be original and free of copyright violations.
+10.2 Service Provider does not warrant third-party tools or services and will not be held liable for their failures.
+10.3 Service Provider is not responsible for losses caused by hacking, malware, data breaches, or Client misuse after delivery.
+
+11. Limitation of Liability
+
+11.1 Service Provider’s total liability under this Agreement shall not exceed the total amount paid by the Client during the term of this Agreement.
+11.2 Service Provider shall not be liable for any indirect, incidental, punitive, or consequential damages, including lost profits, lost data, or business interruption.
+
+12. Dispute Resolution
+
+12.1 Parties agree to attempt good-faith negotiation for any dispute.
+12.2 If unresolved after 30 days, disputes shall be resolved by binding arbitration in [JURISDICTION].
+12.3 The prevailing party is entitled to recover reasonable attorney’s fees.
+
+13. Governing Law
+
+This Agreement shall be governed by and interpreted under the laws of [APPLICABLE_LAW].
+
+14. Entire Agreement
+
+This Agreement constitutes the entire understanding between the Parties and supersedes all prior agreements.
+No modification is valid unless in writing and signed by both Parties (email counts as written consent).
+
+Signatures
+
+Client
+Name: [CLIENT_NAME]
+Signature: _________________________________
+Date: _____________________________________
+
+Service Provider
+Name: [PROVIDER_NAME]
+Signature: _________________________________
+Date: _____________________________________

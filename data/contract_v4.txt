@@ -1,0 +1,116 @@
+DRAFT CONTRACT
+
+```markdown
+# Marketing Consultant Agreement
+
+This Marketing Consultant Agreement ("Agreement") is entered into as of [DATE], by and between:
+
+**Client:**
+- Name: [CLIENT_NAME]
+- Address: [CLIENT_ADDRESS]
+- Email: [CLIENT_EMAIL]
+- Phone: [CLIENT_PHONE]
+
+**Consultant:**
+- Name: [CONSULTANT_NAME]
+- Address: [CONSULTANT_ADDRESS]
+- Email: [CONSULTANT_EMAIL]
+- Phone: [CONSULTANT_PHONE]
+
+The Parties agree as follows:
+
+## 1. Scope of Work
+
+1.1 The Consultant will provide marketing consulting services as outlined in the attached Scope of Work document ("SOW"). This includes specific deliverables, timelines, and objectives agreed upon by both parties.
+
+1.2 Any work not explicitly described in the SOW is considered out-of-scope and requires written approval and additional compensation at the hourly rate defined herein.
+
+## 2. Compensation
+
+2.1 The Client will pay the Consultant $100 per hour for all work performed.
+
+2.2 The Consultant shall invoice the Client biweekly. Invoices must be paid within 30 days of receipt unless otherwise agreed in writing.
+
+2.3 Any invoice not paid within 30 days may incur a late fee of 1.5% per month or the maximum allowed by law, whichever is lower.
+
+2.4 The Client will reimburse the Consultant for reasonable expenses incurred in the performance of the services, such as travel or materials, provided that such expenses are pre-approved by the Client.
+
+## 3. Term and Termination
+
+3.1 This Agreement begins on [START_DATE] and shall continue until [END_DATE], unless terminated earlier as provided herein.
+
+3.2 Either party may terminate this Agreement at any time upon 30 days written notice to the other party.
+
+3.3 Upon termination, the Client shall pay the Consultant for all services performed and deliverables provided up to the date of termination.
+
+3.4 Provisions regarding Confidentiality, Intellectual Property, and Indemnification shall survive termination.
+
+## 4. Confidentiality
+
+4.1 Both Parties agree to maintain strict confidentiality regarding proprietary information, client data, and business details.
+
+4.2 Confidentiality obligations survive termination indefinitely.
+
+## 5. Intellectual Property
+
+5.1 Upon full payment of all fees, the Client shall own all intellectual property rights to the deliverables created specifically for the project.
+
+5.2 The Consultant retains rights to any pre-existing tools, processes, and proprietary methods used in the creation of the deliverables.
+
+## 6. Indemnification
+
+6.1 Each party agrees to indemnify and hold harmless the other party from any claims, damages, or liabilities arising from the indemnifying party's breach of this Agreement or negligence.
+
+## 7. Liability Limitation
+
+7.1 The Consultant’s total liability under this Agreement shall not exceed the total amount paid by the Client during the term of this Agreement.
+
+7.2 The Consultant shall not be liable for any indirect, incidental, punitive, or consequential damages, including lost profits, lost data, or business interruption.
+
+## 8. Non-Compete and Non-Solicitation
+
+8.1 The Consultant agrees not to compete with the Client or solicit the Client's employees or clients for a period of one year following the termination of this Agreement.
+
+## 9. Dispute Resolution
+
+9.1 Parties agree to attempt good-faith negotiation for any dispute.
+
+9.2 If unresolved after 30 days, disputes shall be resolved by binding arbitration in [JURISDICTION].
+
+9.3 The prevailing party is entitled to recover reasonable attorney’s fees.
+
+## 10. Force Majeure
+
+10.1 Neither party shall be liable for any failure to perform due to causes beyond their reasonable control, including but not limited to acts of God, war, terrorism, or natural disasters.
+
+## 11. Governing Law
+
+This Agreement shall be governed by and interpreted under the laws of [APPLICABLE_LAW].
+
+## 12. Entire Agreement
+
+This Agreement constitutes the entire understanding between the Parties and supersedes all prior agreements. No modification is valid unless in writing and signed by both Parties (email counts as written consent).
+
+## Signatures
+
+**Client**  
+Name: [CLIENT_NAME]  
+Signature: _________________________________  
+Date: _____________________________________  
+
+**Consultant**  
+Name: [CONSULTANT_NAME]  
+Signature: _________________________________  
+Date: _____________________________________  
+
+## Suggestions & Improvements
+
+1. **Indemnification Clause**: This clause is crucial as it protects both parties from potential legal claims arising from the consultant's work. It ensures that each party is responsible for their own actions and any resulting legal issues.
+
+2. **Non-Solicitation Clause**: This clause prevents the consultant from poaching the client's employees or clients, which is important for maintaining the client's business stability and relationships.
+
+3. **Force Majeure Clause**: Including this clause protects both parties from liabilities due to unforeseen events beyond their control, such as natural disasters or other emergencies, ensuring that neither party is unfairly penalized for circumstances they cannot control.
+```
+
+
+[End of Draft]

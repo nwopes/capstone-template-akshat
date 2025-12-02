@@ -59,6 +59,9 @@ class DraftingSupervisor:
             "Only use placeholders like [PARTY_NAME] if the value is TRULY missing from the brief. "
             "If improving, review the CURRENT DRAFT and fix any issues, consistency warnings, or missing sections. "
             "Do not make up values. "
+            "At the very end of the contract, add a section called '## Suggestions & Improvements'. "
+            "In this section, list 2-3 specific clauses or protections that are missing from the user's request but would be beneficial (e.g., Indemnification, Non-Solicitation, Force Majeure). "
+            "Explain WHY they are important. "
             "Return the full contract text in Markdown format."
         )
         chain = prompt | self.llm | StrOutputParser()

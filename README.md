@@ -79,6 +79,12 @@ Below is the step-by-step plan for executing the full project.
 - [x] Improve Error Handling (Fix crashes)
 - [x] Implement Smart Feedback (LLM-based guidance)
 
+### Phase 5: Advanced Capabilities (Final Polish)
+- [x] **Smart Placeholder Filling**: LLM extracts specific values (dates, names, rates) from natural language and fills them into the contract.
+- [x] **Universal Contract Template**: Generalized "Service Agreement" structure that works for any industry.
+- [x] **Advisor Mode**: Proactively suggests missing clauses (e.g., Indemnification) and improvements.
+- [x] **Versioned Exports**: Automatically saves `contract_v2.txt`, `contract_v3.txt` to prevent overwriting.
+
 ### Features
 - **Natural Language Interface**: Chat with Lexis to get help or guidance.
 - **Smart Routing**: Automatically detects if you want to create, improve, review, or manage contracts.
@@ -89,6 +95,8 @@ Below is the step-by-step plan for executing the full project.
 - **Enhanced Workflows**: Supports creating, improving, and reviewing/completing contracts with internet research and market pricing.
 - **Admin Automation**: Extracts deadlines and generates `.ics` calendar files.
 - **Context-Aware Memory**: Manages multiple sessions/contracts independently (use `/new`, `/session`, `/info`).
+- **Universal Advisor**: Uses a robust "General Service Agreement" template for all requests and suggests improvements/missing clauses.
+- **Smart Data Extraction**: Intelligently parses `[KEY]Value` inputs or natural language to fill contract placeholders.
 
 ---
 
