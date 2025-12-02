@@ -124,6 +124,73 @@ I have implemented all the core subgraphs (Research, Drafting, Negotiation, Admi
 
 # 🧩 Project Structure
 
+## System Architecture
+
+```mermaid
+graph TD
+    %% Nodes
+    User([User Input])
+    Router{Router}
+    
+    subgraph "Orchestrator"
+        GenAI[General Assistant]
+        
+        subgraph "Research Subgraph"
+            Plan[Research Plan]
+            Search[Template Search]
+            Structure[Structure Research]
+            Market[Market Research]
+            Extractor[Fact Extractor]
+            Synthesizer[Synthesizer]
+            Audit[Audit Log]
+        end
+        
+        subgraph "Drafting Subgraph"
+            Drafter[Contract Writer + Advisor]
+        end
+        
+        subgraph "Admin Subgraph"
+            Deadline[Deadline Extractor]
+            ICS[ICS Generator]
+            Sig[Signature Exporter]
+            Notify[Notify User]
+            TxtExport[TXT Exporter]
+        end
+        
+        Validator[Validator]
+    end
+    
+    %% Edges
+    User --> Router
+    
+    Router -->|chat| GenAI
+    Router -->|admin| Deadline
+    Router -->|create/improve/review| Plan
+    
+    %% Research Flow
+    Plan --> Search
+    Search --> Structure
+    Structure --> Market
+    Market --> Extractor
+    Extractor --> Synthesizer
+    Synthesizer --> Audit
+    Audit --> Drafter
+    
+    %% Drafting Flow
+    Drafter --> Validator
+    
+    %% Admin Flow
+    Deadline --> ICS
+    ICS --> Sig
+    Sig --> Notify
+    Notify --> TxtExport
+    TxtExport --> Validator
+    
+    %% End
+    Validator --> Output([Final Output])
+    GenAI --> Output
+```
+
 This repository must contain the *exact* structure:
 
 capstone-template-akshat/
