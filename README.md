@@ -22,16 +22,18 @@ My project follows the architecture defined in `docs/ARCHITECTURE.md` and implem
 ## 1. Title  
 Lexis-Freelance-Local: AI Legal Assistant for Freelancers
 
-## 2. Overview  
-Lexis-Freelance-Local is a local-only, CLI-driven tool designed to help freelancers generate, review, and negotiate service contracts. It uses a multi-agent architecture to research legal precedents, draft clauses, analyze changes, and manage administrative tasks like scheduling and invoicing, all without sending sensitive data to a cloud server (except for LLM inference).
+## 2. Overview
+Lexis-Freelance-Local is an advanced AI legal assistant designed specifically for freelancers. It automates the entire contract lifecycle—from researching legal precedents and drafting robust agreements to reviewing existing contracts for loopholes and managing administrative tasks like deadline tracking and invoicing. Built with a privacy-first, local-first architecture, it leverages a multi-agent system to provide expert legal guidance without compromising sensitive data.
 
-## 3. Reason for choosing this project  
-This project demonstrates advanced usage of:
-- **LangGraph** for orchestrating complex, multi-step workflows (Research, Drafting, Negotiation, Admin).
-- **Tool Calling** for generating documents (PDF/DOCX) and managing signatures.
-- **Retrieval Augmented Generation (RAG)** using ChromaDB to fetch relevant legal clauses.
-- **Structured Output** for strict adherence to data models (ContractState).
-- **Prompt Engineering** to guide agents in specific legal tasks without hallucination.
+## 3. Reason for choosing this project
+This project was chosen to demonstrate mastery of the core concepts taught in the course by implementing them in a complex, real-world application:
+
+*   **Prompting**: Utilized extensively to guide agents (Research, Drafting, Admin) in performing specific legal tasks with high accuracy and adopting different personas (e.g., "Expert Drafter" vs. "Critical Reviewer").
+*   **Structured Output**: Implemented via Pydantic models (`ContractState`) to ensure strict adherence to data schemas across the multi-agent graph, preventing the common issue of unstructured LLM responses.
+*   **Semantic Search & RAG**: Used ChromaDB to index and retrieve relevant legal clauses (`template_store.py`), allowing the AI to draft contracts based on proven templates rather than hallucination.
+*   **Tool Calling**: Integrated custom tools for file generation (PDF, TXT, ICS) and system operations, demonstrating how LLMs can interact with the external environment to perform actions.
+*   **LangGraph**: The entire application is orchestrated as a stateful graph, managing complex workflows like "Improve" (Research -> Drafting) and "Admin" (Extraction -> Export) with conditional routing.
+*   **LangSmith**: Used for debugging and tracing the complex interactions between agents to ensure reliability.
 
 ## 4. Plan (each step must be committed separately)
 
