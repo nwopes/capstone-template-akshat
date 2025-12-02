@@ -83,6 +83,7 @@ Below is the step-by-step plan for executing the full project.
 - [x] **Smart Placeholder Filling**: LLM extracts specific values (dates, names, rates) from natural language and fills them into the contract.
 - [x] **Universal Contract Template**: Generalized "Service Agreement" structure that works for any industry.
 - [x] **Advisor Mode**: Proactively suggests missing clauses (e.g., Indemnification) and improvements.
+- [x] **Review Report**: Generates a detailed "Good/Bad/Missing" critique before rewriting the contract.
 - [x] **Versioned Exports**: Automatically saves `contract_v2.txt`, `contract_v3.txt` to prevent overwriting.
 
 ### Features
@@ -96,6 +97,7 @@ Below is the step-by-step plan for executing the full project.
 - **Admin Automation**: Extracts deadlines and generates `.ics` calendar files.
 - **Context-Aware Memory**: Manages multiple sessions/contracts independently (use `/new`, `/session`, `/info`).
 - **Universal Advisor**: Uses a robust "General Service Agreement" template for all requests and suggests improvements/missing clauses.
+- **Detailed Reviews**: Provides a "Contract Review Report" highlighting strengths, weaknesses, and missing clauses.
 - **Smart Data Extraction**: Intelligently parses `[KEY]Value` inputs or natural language to fill contract placeholders.
 
 ---
